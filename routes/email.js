@@ -23,20 +23,23 @@ router.post("/send-email", async (req, res) => {
 
   if (status === "success" && order) {
     // Prepare order details email content
-    const itemsHtml = order.items.map(item => `
-      <li>${item.name} - Quantity: ${item.quantity}, Price: ₹${item.price}</li>
-    `).join("");
+    // const itemsHtml = order.items.map(item => `
+    //   <li>${item.name} - Quantity: ${item.quantity}, Price: ₹${item.price}</li>
+    // `).join("");
 
     mailOptions.html = `
       <h1>Thank you for your order!</h1>
       <p>Order ID: <strong>${order.orderId}</strong></p>
       <ul>
-        ${itemsHtml}
+        ${order.product}
+        ${order.variant}
+        ${order.quantity}
+        // ${order.orderId}
       </ul>
       <p><strong>Total Amount: ₹${order.total}</strong></p>
       <p>Your order was successfully placed.</p>
     `;
-  } else if (status === "failed") {
+  } else if (status === "declined") {
     // Prepare failure reason email content
     mailOptions.html = `
       <h1>Order Failed</h1>

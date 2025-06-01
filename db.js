@@ -10,8 +10,19 @@ db.run(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
-    age INTEGER
+    phonenumber TEXT,
+    street TEXT,
+    city TEXT,
+    state TEXT,
+    zip TEXT,
+    status TEXT,
+    orderno TEXT,
+    productname TEXT,
+    quantity INTEGER,
+    variant TEXT,
+    ordervalue REAL
   )
 `);
+
 
 module.exports = db;
